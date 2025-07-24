@@ -1,12 +1,30 @@
-<h1>Name {{name}}</h1>
-<h2>Course {{Course}}</h2>
-<h3>Age {{Age}}</h3>
+<div class="container">
+  <h1>Student Info Dashboard</h1>
 
-<input [value]="Fees"/>
+  <!-- Two-way binding for student name -->
+  <input type="text" [(ngModel)]="student.name" placeholder="Enter your name" />
 
-<button (click)="toggleActive()">Click</button>
+  
+  <!-- Event binding to toggle status -->
+  <button (click)="toggleActive()">Click</button>
+  
+  <!-- Interpolation with pipes -->
+  <p>Name: {{ student.name | uppercase }}</p>
+  <p>Course: {{ student.course }}</p>
+  <p>Joining Date: {{ student.joiningDate | date:'longDate' }}</p>
+  <p>Fees: {{ student.fees | currency:'INR' }}</p>
 
- <!-- two-way binding -->
-      <h2>Two-way Binding </h2>
-      <input type="text" [(ngModel)]="name" placeholder="Enter your name">
-      <p> you typed: {{name}}</p>
+  <!-- Attribute directive to change color based on status -->
+  <p [style.color]="student.isActive ? 'green' : 'red'">
+    Status: {{ student.isActive ? 'Active' : 'Inactive' }}
+  </p>
+
+
+  <!-- *ngIf example -->
+  <div *ngIf="student.isActive">
+    <p>This student is currently active.</p>
+  </div>
+</div>
+     <div *ngIf="!student.isActive">
+     <p>This student is currently inactive.</p>
+     </div>
